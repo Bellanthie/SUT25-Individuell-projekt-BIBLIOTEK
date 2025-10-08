@@ -24,8 +24,30 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         static int userLogIn()
         {
             Console.Clear(); // gives the user a fresh start if they've written the wrong PIN. When they restart the login screen, we want a new clean message.
-            Console.WriteLine("Välkommen till bibliotekets lånesystem!\n"); // by adding \n, we create another space EVEN after CW giving a cleaner look.
+            Console.WriteLine("Välkommen till bibliotekets lånesystem!\n"); // by adding \n, we create another space EVEN after CW giving a cleaner look. En visuell andnings paus för användaren.
 
+            int attempts = 0;
+            while (attempts < 3) // We tell the program that the User only has 3 attempts to write the correct PIN code
+            {
+                Console.Write("Användarnamn: ");
+                string name = Console.ReadLine()?.Trim().ToLower() ?? ""; // <?. AND ??"">  protects the program from crashing.
+                // line 34 takes in the users userName, eliminating any accidental spaces <Trim()> and with <ToLower()> the program turns the username to small letters regardless of all capitals or lowercase.
+
+                Console.Write("PIN: ");
+                string pin = (Console.ReadLine() ?? "").Trim();// Here we see the ? "" usage again.reusing this to prevent the program from crashing.
+
+                int userId = FindUserIndex(name);
+                if (userId != -1 && pins[userId] == pin)
+                {
+                    Console.WriteLine($"\nInloggad som {userNames[userId]}!\n");
+                    Pause(); // This is a method that waits for the user to press 
+                    return userId;
+                }
+
+
+
+
+            }
 
         }
     }
