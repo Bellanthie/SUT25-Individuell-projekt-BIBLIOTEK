@@ -19,8 +19,18 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
             Console.WriteLine("Välkommen till detta lånesystem!");
             Console.WriteLine("Vänligen skriv in ditt användarnamn och PIN kod:");
-            Console.ReadLine();
-            userLogIn();
+            bool isLoggedIn = Login();
+                if (isLoggedIn)
+            {
+                Console.WriteLine("Inloggning lyckades! Välkommen in!");
+            }
+            else
+            {
+                Console.WriteLine("Inloggning misslyckades. Programmet");
+                Environment.Exit(0); //small but powerful code telling the computer to STOP right now.
+                // The zero, tells the computer to STOP the program AND that there are no problems.
+            }
+                userLogIn();
 
 
 
