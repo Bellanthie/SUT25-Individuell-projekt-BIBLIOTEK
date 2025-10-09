@@ -8,6 +8,34 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 {
     internal class Program
     {
+        // Global Variables
+        // These arrays hold username data for 5 predefined users
+        static string[] användarnamn = { "cornelia", "jojje", "bella", "nathalie", "max" };
+        static string[] pinKoder = { "0000", "1111", "2222", "3333", "4444" };
+
+        // Keeps track of which user is logged in. (-1 means that NO-one is logged in)
+        static int inloggadAnvändare = -1;
+
+        // Available Books in the library: [booktitle, total amount of copies]
+        static string[] bokTitlar =
+        {
+            "The Little Mermaid",
+            "Outlander",
+            "My Demon",
+            "Grekiska För Nybörjare",
+            "Programmering 1 med C#"
+        };
+
+        // Below are predefined available copies of the books 
+        static int[] totalAntalExemplar = { 5, 2, 3, 4, 6 };
+
+
+        // To keep track of how many copies of each book are lent/borrowed
+        static int[] utlånadeExemplar = { 0, 0, 0, 0, 0 };
+
+
+
+
 
         static void Welcome_User_Main(string[] args)
         {
