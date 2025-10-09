@@ -9,17 +9,30 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
     internal class Program
     {
 
-        static void Main(string[] args)
+        static void Welcome_User_Main(string[] args)
         {
-            /* static void SayHello()
-             * {
-             *      Console.WriteLine("Hej där!");
-             *      *** EVERYTHING STARTS HERE. THE PROGRAM STARTS HERE. ALWAYS
-             * */
+            var users = AmountUsers();
+            var books = AmountBooks();
+
+            while (true)
+            {
+                var user = Login(users);
+                if (user == null)
+                {
+                    Console.WriteLine("för många felaktiga försök. Starta om programmet för att försöka igen.");
+                    return;
+                }
+
+                RunMeny(user, books)
+            }
+
+        }    
+
 
             Console.WriteLine("Välkommen till detta lånesystem!");
             Console.WriteLine("Vänligen skriv in ditt användarnamn och PIN kod:\n"); // \n creates an extra space separate to what Console.WriteLine already does, giving a cleaner look.
             bool isLoggedIn = Login();
+
                 if (isLoggedIn)
             {
                 Console.WriteLine("Inloggning lyckades! Välkommen in!");
@@ -33,12 +46,15 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         }
     
 
+        private static bool Login()
+
+
         // Creating a method to welcome user to the Library system.
         // Incorporating that user has max 3 attempts to log in.
         static bool userLogIn()// method used for users Login and pincode
         {
             Console.Clear(); // gives the user a fresh start if they've written the wrong PIN. When they restart the login screen, we want a new clean message.
-            Console.WriteLine("Välkommen till bibliotekets lånesystem!\n"); // by adding \n, we create another space EVEN after CW giving a cleaner look. En visuell andnings paus för användaren.
+            
 
             int attempts = 0;
             while (attempts < 3) // We tell the program that the User only has 3 attempts to write the correct PIN code
