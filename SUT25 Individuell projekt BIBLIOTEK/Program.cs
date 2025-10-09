@@ -29,12 +29,10 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                 Console.WriteLine("Inloggning misslyckades. Programmet");
                 Environment.Exit(0); //small but powerful code telling the computer to STOP right now.
                 // The zero, tells the computer to STOP the program AND that there are no problems.
-            }
-                userLogIn();
-
-
-
+            }                
         }
+
+        static bool Login() // method used for users login and pincode
 
         // Creating a method to welcome user to the Library system.
         // Incorporating that user has max 3 attempts to log in.
