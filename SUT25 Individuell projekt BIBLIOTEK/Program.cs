@@ -18,7 +18,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
              * */
 
             Console.WriteLine("Välkommen till detta lånesystem!");
-            Console.WriteLine("Vänligen skriv in ditt användarnamn och PIN kod:");
+            Console.WriteLine("Vänligen skriv in ditt användarnamn och PIN kod:\n"); // \n creates an extra space separate to what Console.WriteLine already does, giving a cleaner look.
             bool isLoggedIn = Login();
                 if (isLoggedIn)
             {
@@ -31,12 +31,11 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                 // The zero, tells the computer to STOP the program AND that there are no problems.
             }                
         }
-
-        static bool Login() // method used for users login and pincode
+    
 
         // Creating a method to welcome user to the Library system.
         // Incorporating that user has max 3 attempts to log in.
-        static void userLogIn()
+        static bool userLogIn()// method used for users Login and pincode
         {
             Console.Clear(); // gives the user a fresh start if they've written the wrong PIN. When they restart the login screen, we want a new clean message.
             Console.WriteLine("Välkommen till bibliotekets lånesystem!\n"); // by adding \n, we create another space EVEN after CW giving a cleaner look. En visuell andnings paus för användaren.
