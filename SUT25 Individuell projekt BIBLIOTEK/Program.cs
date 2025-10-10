@@ -69,7 +69,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         static void VisaHuvudMeny()
         {
             Console.Clear();
-            Console.WriteLine("********** HUVUDMENY **********");
+            Console.WriteLine("********** HUVUDMENY **********\n");// giving an extra space between title and menu choices
             Console.WriteLine("1. Visa tillgängliga böcker");
             Console.WriteLine("2. Låna en bok");
             Console.WriteLine("3. Lämna tillbaka en bok");
@@ -78,36 +78,36 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             Console.Write("Välj ett alternativ: ");
             string val = Console.ReadLine();
 
-            //switch (val)
-            //{
-            //    case "1":
-            //        // Visa tillgängliga böcker (implementera vid behov)
-            //        Console.WriteLine("Funktion för att visa böcker saknas.");
-            //        Console.ReadKey();
-            //        break;
-            //    case "2":
-            //        // Låna en bok (implementera vid behov)
-            //        Console.WriteLine("Funktion för att låna bok saknas.");
-            //        Console.ReadKey();
-            //        break;
-            //    case "3":
-            //        // Lämna tillbaka en bok (implementera vid behov)
-            //        Console.WriteLine("Funktion för att lämna tillbaka bok saknas.");
-            //        Console.ReadKey();
-            //        break;
-            //    case "4":
-            //        inloggadAnvändare = -1;
-            //        Console.WriteLine("Du har loggat ut.");
-            //        Console.ReadKey();
-            //        break;
-            //    case "5":
-            //        Environment.Exit(0);
-            //        break;
-            //    default:
-            //        Console.WriteLine("Ogiltigt val. Försök igen.");
-            //        Console.ReadKey();
-            //        break;
-            //}
+            switch (val)
+            {
+                case "1":
+                    // Visa tillgängliga böcker (implementera vid behov)
+                    Console.WriteLine("Funktion för att visa böcker saknas.");
+                    Console.ReadKey();
+                    break;
+                case "2":
+                    // Låna en bok (implementera vid behov)
+                    Console.WriteLine("Funktion för att låna bok saknas.");
+                    Console.ReadKey();
+                    break;
+                case "3":
+                    // Lämna tillbaka en bok (implementera vid behov)
+                    Console.WriteLine("Funktion för att lämna tillbaka bok saknas.");
+                    Console.ReadKey();
+                    break;
+                case "4":
+                    inloggadAnvändare = -1;
+                    Console.WriteLine("Du har loggat ut.");
+                    Console.ReadKey();
+                    break;
+                case "5":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Ogiltigt val. Försök igen.");
+                    Console.ReadKey();
+                    break;
+            }
         }
 
         // METHOD 1
