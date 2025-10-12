@@ -13,6 +13,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         static string[] användarnamn = { "cornelia", "jojje", "bella", "nathalie", "max" };
         static string[] pinKoder = { "0000", "1111", "2222", "3333", "4444" };
 
+
         // Keeps track of which user is logged in. (-1 means that NO-one is logged in)
         static int inloggadAnvändare = -1;
 
@@ -32,10 +33,10 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             Console.WriteLine("\nTillgängliga böcker:");
             for (int i = 0; i < bokTitlar.Length; i++)
             {
-                int kvar = totalAntalExemplar[i] - utlånadeExemplar[i];
-                Console.WriteLine($"{i + 1}. {bokTitlar[i]} ({kvar}) exemplar kvar");
+                int tillgängliga = totalAntalExemplar[i] - utlånadeExemplar[i];
+                Console.WriteLine($"{i + 1}. {bokTitlar[i]} - tillgängliga: {tillgängliga}/{totalAntalExemplar[i]}");
             }
-            Console.WriteLine();
+            Console.WriteLine("\nTryck på valfri tangent för att gå tillbaka...");
             Console.ReadKey();
         }
 
@@ -94,9 +95,9 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             switch (val)
             {
                 case "1":
-                    // Visa tillgängliga böcker (implementera vid behov)
+                    VisaTillgängligaBöcker();// How do i call upon the list to help the user see available books?
                     //Console.WriteLine("Funktion för att visa böcker saknas.");
-                                        Console.ReadKey();
+                    Console.ReadKey();
                     break;
                 case "2":
                     // Låna en bok (implementera vid behov)
