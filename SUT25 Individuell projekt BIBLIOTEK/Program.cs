@@ -26,6 +26,19 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             "Programmering 1 med C#"
         };
 
+        // Method  to show available books in the library
+        static void VisaTillgängligaBöcker()
+        {
+            Console.WriteLine("\nTillgängliga böcker:");
+            for (int i = 0; i < bokTitlar.Length; i++)
+            {
+                int kvar = totalAntalExemplar[i] - utlånadeExemplar[i];
+                Console.WriteLine($"{i + 1}. {bokTitlar[i]} ({kvar}) exemplar kvar");
+            }
+            Console.WriteLine();
+            Console.ReadKey();
+        }
+
         static void Main(string[] args)
         {
             while (true)
@@ -82,8 +95,8 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             {
                 case "1":
                     // Visa tillgängliga böcker (implementera vid behov)
-                    Console.WriteLine("Funktion för att visa böcker saknas.");
-                    Console.ReadKey();
+                    //Console.WriteLine("Funktion för att visa böcker saknas.");
+                                        Console.ReadKey();
                     break;
                 case "2":
                     // Låna en bok (implementera vid behov)
