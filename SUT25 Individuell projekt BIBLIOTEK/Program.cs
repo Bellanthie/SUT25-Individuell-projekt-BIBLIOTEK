@@ -12,7 +12,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         // These arrays hold username data for 5 predefined users
         static string[] användarnamn = { "cornelia", "jojje", "bella", "nathalie", "max" };
         static string[] pinKoder = { "0000", "1111", "2222", "3333", "4444" };
-
+        static string[] VisaTillgängligaBöcker = { "The Little Mermaid", "Outlander", " My Demon", "Grekiska För Nybörjare", "Programmering 1 med C#" };
 
         // Keeps track of which user is logged in. (-1 means that NO-one is logged in)
         static int inloggadAnvändare = -1;
