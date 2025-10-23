@@ -204,19 +204,33 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             {
                 Console.WriteLine("Tyvärr, finns det inga exemplar att låna ut.");
             }
-
         }
 
         static void ReturnBook()
         {
-            int chosenBookIndex = -1;
+            //int chosenBookIndex = -1;
             Console.Clear();
-            Console.WriteLine("Välkommen! Vill du lämna tillbaka en bok? Vilken bok vill du lämna tillbaka?:");
+                      
+            // Show the list av all books again so the user can choose the book on the list according to the numerical list
+            for (int i  = 0; i < VisaTillgängligaBöcker.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {VisaTillgängligaBöcker[i]}");
+            }
+
+            // Ask the user which book they'd like to return.
+            Console.WriteLine("Skriv numre på boken du vill lämna tillbaka: ");
+            int användarensVal = int.Parse(Console.ReadLine());
+            int chosenBookIndex = användarensVal - 1;
+
+            // 
+            
             bool anyLent = false;
             // for loop här innan en eventuell if vilkor sats?
-            if ((totalAntalExemplar[chosenBookIndex] > 0))
+            if (utlånadeExemplar[chosenBookIndex] > 0)
             {
-                totalAntalExemplar[chosenBookIndex] -= 1;
+                utlånadeExemplar[chosenBookIndex] -=1;
+                totalAntalExemplar[chosenBookIndex] += 1;
+                Console.WriteLine($"Du har lämnat tillbaka { [chosenBookIndex]}");
             }
         }
 
@@ -246,7 +260,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
 
 //    int attempts = 0;
-//    while (attempts < 3) // We tell the program that the User only has 3 attempts to write the correct PIN code
+//    while (attempts <= 3) // We tell the program that the User only has 3 attempts to write the correct PIN code
 //    {
 //        Console.Write("Användarnamn: ");
 //        string name = Console.ReadLine()?.Trim().ToLower() ?? ""; // <?. AND ??"">  protects the program from crashing.
