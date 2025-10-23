@@ -8,150 +8,6 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 {
     internal class Program
     {
-        // Global Variables
-        // These arrays hold username data for 5 predefined users
-        //static string[] användarnamn = { "cornelia", "jojje", "bella", "nathalie", "max" };
-        //static string[] pinKoder = { "0000", "1111", "2222", "3333", "4444" };
-        static string[] VisaTillgängligaBöcker = { "The Little Mermaid", "Outlander", "My Demon", "Grekiska För Nybörjare", "Programmering 1 med C#" };
-        //static string[] lånBekräftelse = { };
-
-
-        // Available Books in the library: [booktitle, total amount of copies]
-        //static string[] VisaTillgängligaBöcker =
-        //{
-        //    "The Little Mermaid",
-        //    "Outlander",
-        //    "My Demon",
-        //    "Grekiska För Nybörjare",
-        //    "Programmering 1 med C#"
-        //};
-
-
-        // Each user (5 users) may borrow a total of 3 copies per book
-        // The row index shows: userindex, password index, and which book they've chosen.
-        static string[,] userData = new string[5, 3]
-        {
-            { "cornelia", "0000", "", },
-            { "jojje", "1111", "", },
-            { "bella", "2222", "" },
-            { "nathalie", "3333", "", },
-            { "max", "4444", "", }
-
-
-
-        };
-
-
-        // Keeps track of which user is logged in. (-1 means that NO-one is logged in)
-        static int inloggadAnvändare = -1;
-
- 
-        // Method  to show available books in the library
-        static void bokTitlar()
-        
-        {
-            Console.WriteLine("\nTillgängliga böcker:");
-            for (int i = 0; i < VisaTillgängligaBöcker.Length; i++)
-            {
-                int tillgängliga = totalAntalExemplar[i] - utlånadeExemplar[i];
-                Console.WriteLine($"{i + 1}. {VisaTillgängligaBöcker[i]} - tillgängliga: {tillgängliga}/{totalAntalExemplar[i]}");
-            }
-            Console.WriteLine("\nTryck på valfri tangent för att återgå till Huvudmenyn...");
-            
-            Console.ReadKey();
-        }
-        
-        // Method to use and store the CHOICE the user makes from the library of books. 
-        // Keywords to remember here are perhaps: LÅNA BOK (title), ANVÄNDARENSVAL, CHOSENBOXINDEX
-        static void LånaBok()
-        {
-            Console.Clear();
-            int användarensVal = 0;
-            Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
-            Console.WriteLine("Choose a number between 1 - 5:");
-            for (int i = 0; i < VisaTillgängligaBöcker.Length; i++)
-            {
-                int available = totalAntalExemplar[i] - utlånadeExemplar[i];
-                Console.WriteLine($"{i + 1}. {VisaTillgängligaBöcker[i]} - tillgängliga: {available}/{totalAntalExemplar[i]}");
-            }
-            
-            
-            
-            while (!int.TryParse(Console.ReadLine(), out användarensVal) || användarensVal < 1 || användarensVal > 5)
-            {
-                Console.WriteLine("Choose a number between 1 - 5:");
-            }
-
-
-            int chosenBookIndex = användarensVal - 1;
-            if (totalAntalExemplar[chosenBookIndex] > 0)
-            {
-                Console.WriteLine("Denna bokeen är tillgänglig för lån ");
-                Console.WriteLine($"Du har valt att låna {VisaTillgängligaBöcker[användarensVal]}");
-                totalAntalExemplar[chosenBookIndex] -= 1;
-                utlånadeExemplar[chosenBookIndex] += 1;
-            }
-            else
-            {
-                Console.WriteLine("Tyvärr, finns det inga exemplar att låna ut.");
-            }
-            
-        }
-
-        static void ReturnBook()
-        {
-            int chosenBookIndex = -1;
-            Console.Clear();
-            Console.WriteLine("Välkommen! Vill du lämna tillbaka en bok? Vilken bok vill du lämna tillbaka?:");
-            bool anyLent = false;
-            // for loop här innan en eventuell if vilkor sats?
-            if ((totalAntalExemplar[chosenBookIndex] > 0))
-            {
-                totalAntalExemplar[chosenBookIndex] -= 1;
-            }
-        }
-
-        static void Main(string[] args)
-        {
-
-            
-            while (true)
-            {
-                if (inloggadAnvändare == -1)
-                {
-                    if (!LoggaIn())
-                    {
-                        Console.WriteLine("Inloggning misslyckades.");
-                        break;
-                    }
-                }
-                else
-                {
-                    VisaHuvudMeny();
-                }
-            }
-        }
-
-
-        // Below are predefined available copies of the books 
-        static int[] totalAntalExemplar = { 5, 3, 3, 4, 6 };
-
-
-        // To keep track of how many copies of each book are lent/borrowed
-        static int[] utlånadeExemplar = { 0, 0, 0, 0, 0 };
-
-        // Each user (5 users) may borrow a total of 3 copies per book
-        // The row index shows: userindex, columnindex = place from where it's been borrowed
-        static int[,] användareLån = new int[5, 3]
-        {
-            { -1, -1, -1 },
-            { -1, -1, -1 },
-            { -1, -1, -1 },
-            { -1, -1, -1 },
-            { -1, -1, -1 }
-        };
-
-
 
         // This method displays the main menu after a successful login
         static void VisaHuvudMeny()
@@ -241,6 +97,147 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
             return false; // only return false after 3 attempted fails
         }
+
+
+
+
+        // Global Variables
+        // These arrays hold username data for 5 predefined users
+        //static string[] användarnamn = { "cornelia", "jojje", "bella", "nathalie", "max" };
+        //static string[] pinKoder = { "0000", "1111", "2222", "3333", "4444" };
+        static string[] VisaTillgängligaBöcker = { "The Little Mermaid", "Outlander", "My Demon", "Grekiska För Nybörjare", "Programmering 1 med C#" };
+
+        // Available Books in the library: [booktitle, total amount of copies]
+        //static string[] VisaTillgängligaBöcker =
+        //{
+        //    "The Little Mermaid",
+        //    "Outlander",
+        //    "My Demon",
+        //    "Grekiska För Nybörjare",
+        //    "Programmering 1 med C#"
+        //};
+
+
+        // Each user (5 users) may borrow a total of 3 copies per book
+        // The row index shows: userindex, password index, and which book they've chosen.
+        static string[,] userData = new string[5, 3]
+        {
+            { "cornelia", "0000", "", },
+            { "jojje", "1111", "", },
+            { "bella", "2222", "" },
+            { "nathalie", "3333", "", },
+            { "max", "4444", "", }
+
+        };
+
+
+        // Keeps track of which user is logged in. (-1 means that NO-one is logged in)
+        static int inloggadAnvändare = -1;
+
+
+        // This Method is to show the available books existing in the library
+        static void bokTitlar()
+
+        {
+            Console.WriteLine("\nTillgängliga böcker:");
+            for (int i = 0; i < VisaTillgängligaBöcker.Length; i++)
+            {
+                int tillgängliga = totalAntalExemplar[i] - utlånadeExemplar[i];
+                Console.WriteLine($"{i + 1}. {VisaTillgängligaBöcker[i]} - tillgängliga: {tillgängliga}/{totalAntalExemplar[i]}");
+            }
+            Console.WriteLine("\nTryck på valfri tangent för att återgå till Huvudmenyn...");
+
+            Console.ReadKey();
+        }
+
+        // Method to use and store the CHOICE the user makes from the library of books. 
+        // Keywords to remember here are perhaps: LÅNA BOK (title), ANVÄNDARENSVAL, CHOSENBOXINDEX
+        static void LånaBok()
+        {
+            Console.Clear();
+            int användarensVal = 0;
+            Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
+            Console.WriteLine("Choose a number between 1 - 5:");
+            for (int i = 0; i < VisaTillgängligaBöcker.Length; i++)
+            {
+                int available = totalAntalExemplar[i] - utlånadeExemplar[i];
+                Console.WriteLine($"{i + 1}. {VisaTillgängligaBöcker[i]} - tillgängliga: {available}/{totalAntalExemplar[i]}");
+            }
+
+
+            while (!int.TryParse(Console.ReadLine(), out användarensVal) || användarensVal < 1 || användarensVal > 5)
+            {
+                Console.WriteLine("Choose a number between 1 - 5:");
+            }
+
+
+            int chosenBookIndex = användarensVal - 1;
+            if (totalAntalExemplar[chosenBookIndex] > 0)
+            {
+                Console.WriteLine("Denna bokeen är tillgänglig för lån ");
+                Console.WriteLine($"Du har valt att låna {VisaTillgängligaBöcker[användarensVal]}");
+                totalAntalExemplar[chosenBookIndex] -= 1;
+                utlånadeExemplar[chosenBookIndex] += 1;
+            }
+            else
+            {
+                Console.WriteLine("Tyvärr, finns det inga exemplar att låna ut.");
+            }
+
+        }
+
+        static void ReturnBook()
+        {
+            int chosenBookIndex = -1;
+            Console.Clear();
+            Console.WriteLine("Välkommen! Vill du lämna tillbaka en bok? Vilken bok vill du lämna tillbaka?:");
+            bool anyLent = false;
+            // for loop här innan en eventuell if vilkor sats?
+            if ((totalAntalExemplar[chosenBookIndex] > 0))
+            {
+                totalAntalExemplar[chosenBookIndex] -= 1;
+            }
+        }
+
+        static void Main(string[] args)
+        {
+
+
+            while (true)
+            {
+                if (inloggadAnvändare == -1)
+                {
+                    if (!LoggaIn())
+                    {
+                        Console.WriteLine("Inloggning misslyckades.");
+                        break;
+                    }
+                }
+                else
+                {
+                    VisaHuvudMeny();
+                }
+            }
+        }
+
+
+        // Below are predefined available copies of the books 
+        static int[] totalAntalExemplar = { 3, 3, 3, 3, 3 };
+
+
+        // To keep track of how many copies of each book are lent/borrowed
+        static int[] utlånadeExemplar = { 0, 0, 0, 0, 0 };
+
+        // Each user (5 users) may borrow a total of 3 copies per book
+        // The row index shows: userindex, columnindex = place from where it's been borrowed
+        static int[,] användareLån = new int[5, 3]
+        {
+            { -1, -1, -1 },
+            { -1, -1, -1 },
+            { -1, -1, -1 },
+            { -1, -1, -1 },
+            { -1, -1, -1 }
+        };
     }
 }
 
