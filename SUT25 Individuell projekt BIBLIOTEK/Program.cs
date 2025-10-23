@@ -100,6 +100,30 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
 
 
+        static void Main(string[] args)
+        {
+
+
+            while (true)
+            {
+                if (inloggadAnvändare == -1)
+                {
+                    if (!LoggaIn())
+                    {
+                        Console.WriteLine("Inloggning misslyckades.");
+                        break;
+                    }
+                }
+                else
+                {
+                    VisaHuvudMeny();
+                }
+            }
+        }
+
+        // Keeps track of which user is logged in. (-1 means that NO-one is logged in)
+        static int inloggadAnvändare = -1;
+
 
         // Global Variables
         // These arrays hold username data for 5 predefined users
@@ -130,9 +154,6 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
         };
 
-
-        // Keeps track of which user is logged in. (-1 means that NO-one is logged in)
-        static int inloggadAnvändare = -1;
 
 
         // This Method is to show the available books existing in the library
@@ -196,27 +217,6 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             if ((totalAntalExemplar[chosenBookIndex] > 0))
             {
                 totalAntalExemplar[chosenBookIndex] -= 1;
-            }
-        }
-
-        static void Main(string[] args)
-        {
-
-
-            while (true)
-            {
-                if (inloggadAnvändare == -1)
-                {
-                    if (!LoggaIn())
-                    {
-                        Console.WriteLine("Inloggning misslyckades.");
-                        break;
-                    }
-                }
-                else
-                {
-                    VisaHuvudMeny();
-                }
             }
         }
 
