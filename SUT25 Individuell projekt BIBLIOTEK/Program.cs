@@ -246,10 +246,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
             for (int i = 0; i < books.Length; i++)
             {
-                hasLoans = true;
-                //totalAntalLån += bookLoans[loggedInUserIndex, i];
-                Console.WriteLine($" {books[i]} - Antal: {bookLoans[loggedInUserIndex, i]}");
-
+     
                 if (bookLoans[loggedInUserIndex, i] > 0)
                 {
                     hasLoans = true; // This is set to true ONLY if a book is borrowed
