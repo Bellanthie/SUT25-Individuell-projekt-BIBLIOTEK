@@ -109,13 +109,12 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                     break;
                 case "2":
                     LånaBok();
-                    Console.WriteLine();
+                    Console.WriteLine("Låna en Bok ");
                     Console.ReadKey();
                     break;
                 case "3":
-                    //ReturnBook();
-                    // Lämna tillbaka en bok (implementera vid behov)
-                    Console.WriteLine("Lämna tillbaka en bok.");
+                    ReturnBook();
+                    Console.WriteLine("Lämna tillbaka en bok");
                     Console.ReadKey();
                     break;
                 case "4":
@@ -133,7 +132,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                     Console.WriteLine("Ogiltigt val. Försök igen.");
                     Console.ReadKey();
                     break;
-                
+
             }
         }
 
@@ -166,7 +165,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                     if (userData[i, 0] == inputAnvändare && userData[i, 1] == inputPin)
                     {
                         loggedInUserIndex = i; // Stores which user logged in.
-                        Console.WriteLine("\n Inloggning Lyckades!");
+                        Console.WriteLine("\n Inloggning Lyckades! Tryck på valfri tangent för att fortsätta...");
                         return true;
 
                     }
@@ -211,7 +210,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
             while (!int.TryParse(Console.ReadLine(), out användarensVal) || användarensVal < 1 || användarensVal > 5)
             {
-                Console.WriteLine("Choose a number between 1 - 5:");
+                Console.WriteLine("Välje siffran (1 - 5) som är i referens till boken i listan du valt att låna:");
             }
 
 
@@ -246,7 +245,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
             for (int i = 0; i < books.Length; i++)
             {
-     
+
                 if (bookLoans[loggedInUserIndex, i] > 0)
                 {
                     hasLoans = true; // This is set to true ONLY if a book is borrowed
@@ -263,7 +262,52 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             Console.ReadKey();
         }
 
-        
+        static void ReturnBook()
+        {
+            Console.Clear();
+            Console.WriteLine("Välkommen! Vill du lämna tillbaka en bok?");
+
+            // Show all books
+            for (int i = 0; i < books.Length; i++)
+            {
+                int userCount = bookLoans[loggedInUserIndex, i];
+                int totalAvailable = availableAmount[i];
+                Console.WriteLine($"{i + 1}. {books[i]} - Du har: {userCount}, Tillgängliga totalt {totalAvailable} ");
+            }
+
+            // Ask the user to enter the reference number in relation to the chosen book
+            Console.WriteLine("Skriv numret på boken du vill lämna tillbaka: ");
+            if (!int.TryParse(Console.ReadLine(), out int användarensVal) || användarensVal < 1 || användarensVal > books.Length)
+            {
+                Console.WriteLine("Ogiltigt val. Tryck på valfri tangent för att återgå");
+                Console.ReadKey();
+                return;
+            }
+
+            //int användarensVal = int.Parse(Console.ReadLine());
+            int chosenBookIndex = användarensVal - 1;
+
+            // Make sure the book index is VALID so the user doesn't enter a number reference that doesn't exit
+            if (bookLoans[loggedInUserIndex, chosenBookIndex] > 0)
+            {
+                //check whether the logged in user has actually borowed this book
+                bookLoans[loggedInUserIndex, chosenBookIndex] -= 1;
+
+                // Decrease the global borrowed count of books and increase the available copies amount
+                if (borrowedAmount[chosenBookIndex] > 0)
+                    borrowedAmount[chosenBookIndex] -= 1;
+
+                availableAmount[chosenBookIndex] += 1;
+
+                Console.WriteLine($"Du har nu lämnat tillbaka '{books[chosenBookIndex]}' till hyllan. Tack!");
+            }
+            else
+            {
+                Console.WriteLine("Du har inga exemplar av den här boken att lämna tillbaka.");
+            }
+            
+
+        }     
 
     }
 }
