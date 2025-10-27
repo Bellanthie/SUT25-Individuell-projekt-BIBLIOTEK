@@ -89,7 +89,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         // This method displays the main menu after a successful login
         static void VisaHuvudMeny()
         {
-            Console.Clear();
+            
             Console.WriteLine("********** HUVUDMENY **********\n");// giving an extra space between title and menu choices
             Console.WriteLine("1. Visa tillgängliga böcker");
             Console.WriteLine("2. Låna en bok");
@@ -99,6 +99,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             Console.WriteLine("6. Avsluta programmet");
             Console.Write("Välj ett alternativ: ");
             string val = Console.ReadLine();
+            //Console.Clear();
 
             switch (val)
             {
@@ -109,7 +110,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                     break;
                 case "2":
                     LånaBok();
-                    Console.WriteLine("Låna en Bok ");
+                    // Console.WriteLine("Låna en Bok ");
                     Console.ReadKey();
                     break;
                 case "3":
@@ -141,7 +142,6 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         // It returns true if the login is a success. Otherwise, it returns false
         static bool LoggaIn()
         {
-            Console.Clear();
             Console.WriteLine("**********************************************");
             Console.WriteLine("   VÄLKOMMEN TILL BIBLIOTEKETS LÅNESYSTEM!");
             Console.WriteLine("**********************************************");
@@ -166,6 +166,8 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                     {
                         loggedInUserIndex = i; // Stores which user logged in.
                         Console.WriteLine("\n Inloggning Lyckades! Tryck på valfri tangent för att fortsätta...");
+                        Console.ReadKey();
+                        Console.Clear();
                         return true;
                     }
                 }
@@ -195,7 +197,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         {
             Console.Clear();
             int användarensVal = 0;
-            Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
+            //Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
             Console.WriteLine("Choose a number between 1 - 5:");
             for (int i = 0; i < books.Length; i++)
             {
