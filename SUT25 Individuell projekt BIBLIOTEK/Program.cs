@@ -167,14 +167,10 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                         loggedInUserIndex = i; // Stores which user logged in.
                         Console.WriteLine("\n Inloggning Lyckades! Tryck på valfri tangent för att fortsätta...");
                         return true;
-
                     }
-
                 }
-
                 Console.WriteLine("Fel användarnamn eller PIN-kod. Försök igen.\n");
             }
-
             return false; // only return false after 3 attempted fails
         }
 
@@ -305,18 +301,9 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             {
                 Console.WriteLine("Du har inga exemplar av den här boken att lämna tillbaka.");
             }
-            
-
         }     
-
     }
 }
-
-
-
-
-
-
 
 
 //        {
