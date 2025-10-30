@@ -100,6 +100,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             Console.Write("Välj ett alternativ: ");
             string val = Console.ReadLine();
 
+
             switch (val)
             {
                 case "1":
@@ -109,12 +110,12 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                     break;
                 case "2":
                     LånaBok();
-                    Console.WriteLine("Låna en Bok ");
+                    // Console.WriteLine("Låna en Bok ");
                     Console.ReadKey();
                     break;
                 case "3":
                     ReturnBook();
-                    Console.WriteLine("Lämna tillbaka en bok");
+                    //Console.WriteLine("Lämna tillbaka en bok");
                     Console.ReadKey();
                     break;
                 case "4":
@@ -166,6 +167,8 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                     {
                         loggedInUserIndex = i; // Stores which user logged in.
                         Console.WriteLine("\n Inloggning Lyckades! Tryck på valfri tangent för att fortsätta...");
+                        Console.ReadKey();
+                        Console.Clear();
                         return true;
                     }
                 }
@@ -181,8 +184,10 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             Console.WriteLine("\nTillgängliga böcker:");
             for (int i = 0; i < books.Length; i++)
             {
-                int total = availableAmount[i] - borrowedAmount[i];
-                Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {availableAmount[i]}/{total}");
+                //int total = availableAmount[i] - borrowedAmount[i];
+                int remaining = availableAmount[i];
+                int allBooks = availableAmount[i] + borrowedAmount[i];
+                Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {remaining}/{allBooks}");
             }
             Console.WriteLine("\nTryck på valfri tangent för att återgå till Huvudmenyn...");
 
@@ -195,7 +200,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         {
             Console.Clear();
             int användarensVal = 0;
-            Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
+            //Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
             Console.WriteLine("Choose a number between 1 - 5:");
             for (int i = 0; i < books.Length; i++)
             {
@@ -209,11 +214,20 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                 Console.WriteLine("Välje siffran (1 - 5) som är i referens till boken i listan du valt att låna:");
             }
 
+            // *** DET HAR BLIVIT FEL HÄR NÅGONSTANS. VARJE GÅNG ANVÄNDAREN LÅNAR EN BOK, SÅ VISAS
+            // 2/2.
+            // DET SKA VISA 3/3 (det finns 3 tillgängliga kopior av totalt 3 exemplar)
+            // Lånar man en bok ska det istället för: 3/3 | ska det stå 2/3
+            // lånar man ännu en bok ska det stå: 1/3
+            // Sista irriterande grejen är att, när det inte längre finns 3 exemplar kvar DVS 0/3 kopior --> Då ska det stå 0/3 med*
+            // med meddelande att "Det finns inga kopior kvar av denna bok"
+            // OCH det ska inte FORTSÄTTA med -1/3, -2/3 osv. 
+            // Det är DETTA programmet nu gör. Jag förstår inte ännu varför det gör så.
 
             int chosenBookIndex = användarensVal - 1;
             if (availableAmount[chosenBookIndex] > 0)
             {
-                Console.WriteLine("Denna bokeen är tillgänglig för lån ");
+                Console.WriteLine("Denna boken är tillgänglig för lån ");
                 Console.WriteLine($"Du har valt att låna {books[chosenBookIndex]}");
                 availableAmount[chosenBookIndex] -= 1;
                 borrowedAmount[chosenBookIndex] += 1;
@@ -304,6 +318,9 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
         }     
     }
 }
+
+
+
 
 
 //        {
