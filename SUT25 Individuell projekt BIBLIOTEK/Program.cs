@@ -9,7 +9,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
     internal class Program
     {
         // Below are predefined available copies of the books 
-        static int[] availableAmount = { 3, 3, 3, 3, 3 };
+        //static int[] availableAmount = { 3, 3, 3, 3, 3 };
 
         static int[] borrowedAmount = { 0, 0, 0, 0, 0 };
 
@@ -202,11 +202,23 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             int användarensVal = 0;
             //Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
             Console.WriteLine("Choose a number between 1 - 5:");
+
             for (int i = 0; i < books.Length; i++)
             {
-                int available = availableAmount[i] - borrowedAmount[i];
-                Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {available}/{availableAmount[i]}");
+                //int total = availableAmount[i] - borrowedAmount[i];
+                int remaining = availableAmount[i];
+                int allBooks = availableAmount[i] + borrowedAmount[i];
+                Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {remaining}/{allBooks}");
             }
+
+
+
+
+            //for (int i = 0; i < books.Length; i++)
+            //{
+            //    int available = availableAmount[i] - borrowedAmount[i];
+            //    Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {available}/{availableAmount[i]}");
+            //}
 
 
             while (!int.TryParse(Console.ReadLine(), out användarensVal) || användarensVal < 1 || användarensVal > 5)
