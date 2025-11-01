@@ -10,24 +10,9 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
     {
         // Below are predefined available copies of the books 
         static int[] availableAmount = { 3, 3, 3, 3, 3 };
-
         static int[] borrowedAmount = { 0, 0, 0, 0, 0 };
-
-        // Each user (5 users) may borrow a total of 3 copies per book
-        // The row index shows: userindex, columnindex = place from where it's been borrowed
-        static int[,] användareLån = new int[5, 3]
-        {
-            { -1, -1, -1 },
-            { -1, -1, -1 },
-            { -1, -1, -1 },
-            { -1, -1, -1 },
-            { -1, -1, -1 }
-        };
-
-
         // Keeps track of which user is logged in. (-1 means that NO-one is logged in)
         static int loggedInUserIndex = -1;
-
         static int[,] bookLoans = new int[5, 5]
         {
             {0,0,0,0,0 },
@@ -36,24 +21,9 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             {0,0,0,0,0 },
             {0,0,0,0,0 }
         };
-
-
         // Global Variables
         // These arrays hold username data for 5 predefined users
-        //static string[] användarnamn = { "cornelia", "jojje", "bella", "nathalie", "max" };
-        //static string[] pinKoder = { "0000", "1111", "2222", "3333", "4444" };
         static string[] books = { "The Little Mermaid", "Outlander", "My Demon", "Grekiska För Nybörjare", "Programmering 1 med C#" };
-
-        // Available Books in the library: [booktitle, total amount of copies]
-        //static string[] VisaTillgängligaBöcker =
-        //{
-        //    "The Little Mermaid",
-        //    "Outlander",
-        //    "My Demon",
-        //    "Grekiska För Nybörjare",
-        //    "Programmering 1 med C#"
-        //};
-
 
         // Each user (5 users) may borrow a total of 3 copies per book
         // The row index shows: userindex, password index, and which book they've chosen.
@@ -104,18 +74,18 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             switch (val)
             {
                 case "1":
-                    ShowBooks();// How do i call upon the list to help the user see available books?
-                    //Console.WriteLine("Funktion för att visa böcker saknas.");
+                    ShowBooks();
+                    Console.WriteLine("Tryck på valfri knapp för att fortsätta...");
                     Console.ReadKey();
                     break;
                 case "2":
                     LånaBok();
-                    // Console.WriteLine("Låna en Bok ");
+                    Console.WriteLine("Låna en Bok ");
                     Console.ReadKey();
                     break;
                 case "3":
                     ReturnBook();
-                    //Console.WriteLine("Lämna tillbaka en bok");
+                    Console.WriteLine("Lämna tillbaka en bok");
                     Console.ReadKey();
                     break;
                 case "4":
@@ -184,38 +154,24 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             Console.WriteLine("\nTillgängliga böcker:");
             for (int i = 0; i < books.Length; i++)
             {
-                //int total = availableAmount[i] - borrowedAmount[i];
-                int remaining = availableAmount[i];
-                int allBooks = availableAmount[i] + borrowedAmount[i];
-                Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {remaining}/{allBooks}");
+                int total = availableAmount[i] - borrowedAmount[i];
+                Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {availableAmount[i]}/{total}");
             }
-            Console.WriteLine("\nTryck på valfri tangent för att återgå till Huvudmenyn...");
-
-            Console.ReadKey();
         }
 
         // Method to use and store the CHOICE the user makes from the library of books. 
         // Keywords to remember here are perhaps: LÅNA BOK (title), ANVÄNDARENSVAL, CHOSENBOXINDEX
-        static void LånaBok()
+        static void BorrowBook()
         {
             Console.Clear();
             int användarensVal = 0;
-            //Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
+            Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
             Console.WriteLine("Choose a number between 1 - 5:");
-
             for (int i = 0; i < books.Length; i++)
             {
-                //int total = availableAmount[i] - borrowedAmount[i];
-                int remaining = availableAmount[i];
-                int allBooks = availableAmount[i] + borrowedAmount[i];
-                Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {remaining}/{allBooks}");
+                int available = availableAmount[i] - borrowedAmount[i];
+                Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {available}/{availableAmount[i]}");
             }
-
-            //for (int i = 0; i < books.Length; i++)
-            //{
-            //    int available = availableAmount[i] - borrowedAmount[i];
-            //    Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {available}/{availableAmount[i]}");
-            //}
 
 
             while (!int.TryParse(Console.ReadLine(), out användarensVal) || användarensVal < 1 || användarensVal > 5)
@@ -223,15 +179,6 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                 Console.WriteLine("Välje siffran (1 - 5) som är i referens till boken i listan du valt att låna:");
             }
 
-            // *** DET HAR BLIVIT FEL HÄR NÅGONSTANS. VARJE GÅNG ANVÄNDAREN LÅNAR EN BOK, SÅ VISAS
-            // 2/2.
-            // DET SKA VISA 3/3 (det finns 3 tillgängliga kopior av totalt 3 exemplar)
-            // Lånar man en bok ska det istället för: 3/3 | ska det stå 2/3
-            // lånar man ännu en bok ska det stå: 1/3
-            // Sista irriterande grejen är att, när det inte längre finns 3 exemplar kvar DVS 0/3 kopior --> Då ska det stå 0/3 med*
-            // med meddelande att "Det finns inga kopior kvar av denna bok"
-            // OCH det ska inte FORTSÄTTA med -1/3, -2/3 osv. 
-            // Det är DETTA programmet nu gör. Jag förstår inte ännu varför det gör så.
 
             int chosenBookIndex = användarensVal - 1;
             if (availableAmount[chosenBookIndex] > 0)
@@ -240,7 +187,6 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                 Console.WriteLine($"Du har valt att låna {books[chosenBookIndex]}");
                 availableAmount[chosenBookIndex] -= 1;
                 borrowedAmount[chosenBookIndex] += 1;
-                //vilken data vill jag ändra
                 bookLoans[loggedInUserIndex, chosenBookIndex] += 1;
 
             }
@@ -260,8 +206,6 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
             //Check if the user has any loans
             bool hasLoans = false;
-            //int totalAntalLån = 0;
-
             for (int i = 0; i < books.Length; i++)
             {
 
@@ -303,7 +247,6 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                 return;
             }
 
-            //int användarensVal = int.Parse(Console.ReadLine());
             int chosenBookIndex = användarensVal - 1;
 
             // Make sure the book index is VALID so the user doesn't enter a number reference that doesn't exit
@@ -324,12 +267,9 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             {
                 Console.WriteLine("Du har inga exemplar av den här boken att lämna tillbaka.");
             }
-        }     
+        }
     }
 }
-
-
-
 
 
 //        {
