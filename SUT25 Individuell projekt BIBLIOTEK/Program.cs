@@ -9,7 +9,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
     internal class Program
     {
         // Below are predefined available copies of the books 
-        //static int[] availableAmount = { 3, 3, 3, 3, 3 };
+        static int[] availableAmount = { 3, 3, 3, 3, 3 };
 
         static int[] borrowedAmount = { 0, 0, 0, 0, 0 };
 
@@ -210,9 +210,6 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                 int allBooks = availableAmount[i] + borrowedAmount[i];
                 Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {remaining}/{allBooks}");
             }
-
-
-
 
             //for (int i = 0; i < books.Length; i++)
             //{
