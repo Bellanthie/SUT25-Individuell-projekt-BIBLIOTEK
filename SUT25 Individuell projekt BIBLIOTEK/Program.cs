@@ -79,7 +79,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
                     Console.ReadKey();
                     break;
                 case "2":
-                    LånaBok();
+                    BorrowBook();
                     Console.WriteLine("Låna en Bok ");
                     Console.ReadKey();
                     break;
