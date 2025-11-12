@@ -9,7 +9,7 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
     internal class Program
     {
         // Below are predefined available copies of the books 
-        static int[] availableAmount = { 3, 3, 3, 3, 3 };
+        static int[] availableAmount = { 4, 3, 2, 5, 3 };
         static int[] borrowedAmount = { 0, 0, 0, 0, 0 };
         // Keeps track of which user is logged in. (-1 means that NO-one is logged in)
         static int loggedInUserIndex = -1;
@@ -39,25 +39,27 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
         static void Main(string[] args)
         {
-            while (true)
+            bool keepRunning = true;
+            while (keepRunning)
             {
                 if (loggedInUserIndex == -1)
                 {
                     if (!LoggaIn())
                     {
                         Console.WriteLine("Inloggning misslyckades.");
-                        break;
+                        keepRunning = false;
                     }
                 }
                 else
                 {
-                    VisaHuvudMeny();
+                    keepRunning = VisaHuvudMeny();
                 }
             }
+            Console.WriteLine("Tack för denna gång.");
         }
 
         // This method displays the main menu after a successful login
-        static void VisaHuvudMeny()
+        static bool VisaHuvudMeny()
         {
             Console.Clear();
             Console.WriteLine("********** HUVUDMENY **********\n");// giving an extra space between title and menu choices
@@ -70,39 +72,37 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             Console.Write("Välj ett alternativ: ");
             string val = Console.ReadLine();
 
-
             switch (val)
             {
                 case "1":
                     ShowBooks();
                     Console.WriteLine("Tryck på valfri knapp för att fortsätta...");
                     Console.ReadKey();
-                    break;
+                    return true;
                 case "2":
                     BorrowBook();
                     Console.WriteLine("Låna en Bok ");
                     Console.ReadKey();
-                    break;
+                    return true;
                 case "3":
                     ReturnBook();
                     Console.WriteLine("Lämna tillbaka en bok");
                     Console.ReadKey();
-                    break;
+                    return true;
                 case "4":
                     MyLoans();
-                    break;
+                    return true;
                 case "5":
                     loggedInUserIndex = -1;
                     Console.WriteLine("Du har loggat ut.");
                     Console.ReadKey();
-                    break;
+                    return true;
                 case "6":
-                    Environment.Exit(0);
-                    break;
+                    return false;
                 default:
                     Console.WriteLine("Ogiltigt val. Försök igen.");
                     Console.ReadKey();
-                    break;
+                    return true;
 
             }
         }
@@ -149,12 +149,11 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
 
         // This Method is to show the available books existing in the library
         static void ShowBooks()
-
         {
             Console.WriteLine("\nTillgängliga böcker:");
             for (int i = 0; i < books.Length; i++)
             {
-                int total = availableAmount[i] - borrowedAmount[i];
+                int total = availableAmount[i] + borrowedAmount[i];
                 Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {availableAmount[i]}/{total}");
             }
         }
@@ -167,11 +166,13 @@ namespace SUT25_Individuell_projekt_BIBLIOTEK
             int användarensVal = 0;
             Console.WriteLine("\nLåna en Bok: "); // see below: console.readline is just to make sure that user inputs and ACTUAL NUMBER.
             Console.WriteLine("Choose a number between 1 - 5:");
-            for (int i = 0; i < books.Length; i++)
-            {
-                int available = availableAmount[i] - borrowedAmount[i];
-                Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {available}/{availableAmount[i]}");
-            }
+            ShowBooks();
+
+            //for (int i = 0; i < books.Length; i++)
+            //{
+            //    int available = availableAmount[i] - borrowedAmount[i];
+            //    Console.WriteLine($"{i + 1}. {books[i]} - tillgängliga: {available}/{availableAmount[i]}");
+            //}
 
 
             while (!int.TryParse(Console.ReadLine(), out användarensVal) || användarensVal < 1 || användarensVal > 5)
